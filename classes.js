@@ -3,12 +3,6 @@ class Screen {
         this.element = element;
         this.width = width;
         this.height = height;
-        this.edge = {
-            left: element.offsetLeft,
-            top: element.offsetTop,
-            right: element.offsetLeft + element.offsetWidth,
-            bottom: element.offsetTop + element.offsetHeight
-        }
     }
 
     resize(width, height) {
@@ -19,14 +13,48 @@ class Screen {
     }
 }
 
-class Ball {
-    constructor(element, radius, x, y, velX, velY) {
+class Matter {
+    constructor(element, x, y, velX, velY) {
         this.element = element;
-        this.radius = radius;
         this.x = x;
         this.y = y;
         this.velX = velX;
         this.velY = velY;
+    }
+    update(container) {
+        this.x += this.velX;
+        this.y += this.velY;
+
+        this.element.style.left = this.x + container.element.offsetLeft + 'px';
+        this.element.style.top = this.y + container.element.offsetTop + 'px';
+    }
+
+}
+
+class Photon extends Matter {
+    constructor(element, x, y, velX, velY, energy) {
+        super(element, x, y, velX, velY)
+        this.energy = energy;
+
+        this.velX = 10;
+        this.velY = 10;
+    }
+
+    bounce(container) {
+        // Bounce logic
+        if (this.x + this.velX > container.width || this.x < 2) {
+            this.velX *= -1;
+        }
+
+        if (this.y + this.velY > container.height || this.y < 2) {
+            this.velY *= -1;
+        }
+    }
+}
+class Ball extends Matter {
+    constructor(element, x, y, velX, velY, radius) {
+        super(element, x, y, velX, velY);
+        this.radius = radius;
 
         this.element.style.width = this.radius * 2 + 'px';
         this.element.style.height = this.radius * 2 + 'px';
@@ -48,11 +76,11 @@ class Ball {
 
     bounce(container) {
         // Bounce logic
-        if (this.x + this.radius * 2 > container.width || this.x < 0) {
+        if (this.x + this.radius * 2 > container.width || this.x < 2) {
             this.velX *= -1;
         }
 
-        if (this.y + this.radius * 2 > container.height || this.y < 0) {
+        if (this.y + this.radius * 2 > container.height || this.y < 2) {
             this.velY *= -1;
         }
     }

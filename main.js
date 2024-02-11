@@ -1,30 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
     const sandboxElement = document.getElementById("sandboxDiv");
-    const ballElement = document.querySelector('.ball');
+
+    // This will be overwritten by the Object Array implemented in the future
+    const photonElement = document.querySelector('.photon');
 
     const sandbox = new Screen(sandboxElement, 800, 600);
     sandbox.resize(800, 600)
 
-    const ball = new Ball(ballElement, 60, 20, 50, 5, 5);
-    ball.setRadius(20);
+    const photon = new Photon(photonElement, 0, 0, 0, 0, 10);
 
     function updateGame() {
-        ball.update(sandbox);
-        ball.bounce(sandbox);
+        photon.update(sandbox);
+        photon.bounce(sandbox);
 
-        document.getElementById("dbBallX").innerText = ball.x;
-        document.getElementById("dbBallY").innerText = ball.y;
-        document.getElementById("dbBallVelX").innerText = ball.velX;
-        document.getElementById("dbBallVelY").innerText = ball.velY;
-        document.getElementById("dbBallRadius").innerText = ball.radius;
-        document.getElementById("dbScreenWidth").innerText = sandbox.width;
-        document.getElementById("dbScreenHeight").innerText = sandbox.height;
-        document.getElementById("dbScreenLeft").innerText = sandbox.element.offsetLeft;
-        document.getElementById("dbScreenTop").innerText = sandbox.element.offsetTop;
-        document.getElementById("dbScreenRight").innerText = sandbox.element.offsetLeft + sandbox.element.offsetWidth;
-        document.getElementById("dbScreenBottom").innerText = sandbox.element.offsetTop + sandbox.element.offsetHeight;
+        debug(photon, sandbox);
         requestAnimationFrame(updateGame);
     }
 
     updateGame();
 });
+
+// This is poorly coded but it is temporary.
+function debug(object, container) {
+    document.getElementById("dbPhotonX").innerText = object.x;
+    document.getElementById("dbPhotonY").innerText = object.y;
+    document.getElementById("dbPhotonVelX").innerText = object.velX;
+    document.getElementById("dbPhotonVelY").innerText = object.velY;
+    document.getElementById("dbScreenWidth").innerText = container.width;
+    document.getElementById("dbScreenHeight").innerText = container.height;
+    document.getElementById("dbScreenLeft").innerText = container.element.offsetLeft;
+    document.getElementById("dbScreenTop").innerText = container.element.offsetTop;
+    document.getElementById("dbScreenRight").innerText = container.element.offsetLeft + container.element.offsetWidth;
+    document.getElementById("dbScreenBottom").innerText = container.element.offsetTop + container.element.offsetHeight;
+}
+/* WIP - this will replace the usage of querySelector and getElementByID.
+
+ function create(className, htmlClass) {
+    // Creating the object
+    const object = new className();
+
+    // Creating the DOM Element
+    const element = document.createElement("div");
+    element.classList.add(htmlClass);
+
+    sandbox.element.appendChild(element);a
+    }
+*/

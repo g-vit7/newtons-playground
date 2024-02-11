@@ -9,42 +9,55 @@
 </head>
 
 <body>
-    <div id="sandboxDiv">
-        <div class="ball"></div>
+    <div id="containerDiv">
+        <div id="sandboxDiv">
+            <div id="sandboxMask">
+                <div class="photon"></div>
+            </div>
+        </div>
+        <div id="gui">
+            <button id="gCreateBall">Ball</button>
+            <button id="gCreateLight">Light</button>
+            <button id="gReset">Clear</button>
+        </div>
     </div>
 
     <div id="debug">
         <table>
             <tr>
-                <td><h3>Ball Position</h3></td>
+                <td>
+                    <h3>Photon Position</h3>
+                </td>
             </tr>
-            
+
             <tr>
                 <td><b>X:</b></td>
-                <td id="dbBallX"></td>
+                <td id="dbPhotonX"></td>
             </tr>
             <tr>
                 <td><b>Y:</b></td>
-                <td id="dbBallY"></td>
+                <td id="dbPhotonY"></td>
             </tr>
             <tr>
-                <td><h3>Velocity</h3></td>
+                <td>
+                    <h3>Velocity</h3>
+                </td>
             </tr>
             <tr>
                 <td><b>X:</b></td>
-                <td id="dbBallVelX"></td>
+                <td id="dbPhotonVelX"></td>
             </tr>
             <tr>
                 <td><b>Y:</b></td>
-                <td id="dbBallVelY"></td>
+                <td id="dbPhotonVelY"></td>
             </tr>
+            <td>
+                <hr>
+            </td>
             <tr>
-                <td><b>Radius:</b></td>
-                <td id="dbBallRadius"></td>
-            </tr>
-            <td><hr></td>
-            <tr>
-                <td><h3>Screen [Sandbox]</h3></td>
+                <td>
+                    <h3>Screen [Sandbox]</h3>
+                </td>
             </tr>
             <tr>
                 <td><b>Width:</b></td>
@@ -72,7 +85,7 @@
             </tr>
         </table>
     </div>
-    
+
 
     <script type="text/javascript" src="classes.js"></script>
     <script type="text/javascript" src="main.js"></script>
